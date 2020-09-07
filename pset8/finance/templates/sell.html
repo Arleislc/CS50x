@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <form novalidate action="/sell" method="post">
+        {% if invalid: %}
+            <p id="alert" style="font-size:12px; color:red; font-style: italic">You don't have enough shares enough</p>
+        {% endif %}
+        <div class="form-group">
+            <input id="symbol" autocomplete="off" readonly 
+            onfocus="this.removeAttribute('readonly');" autofocus class="form-control" name="symbol" placeholder="Symbol" type="text" required>
+        </div>
+        <div class="form-group">
+            <input id="quantity" autocomplete="off" readonly 
+            onfocus="this.removeAttribute('readonly');" class="form-control" name="quantity" placeholder="Quantity" type="number" required>
+        </div>
+        <button id="submit" class="btn btn-primary" type="submit" disabled>Sell</button>
+    </form>
+
+
+    <script>
+        let symbol = document.querySelector("#symbol")
+        let quantity = document.querySelector("#quantity")
+        let submit = document.querySelector("#submit")
+        let alert = document.querySelector("#alert")
+
+        symbol.value = ""
+        quantity.value = ""
+
+        symbol.onkeyup = validate
+        quantity.onkeyup = validate
+        symbol.onchange = validate
+        quantity.onchange = validate
+
+        function validate() {
+            // setTimeout(()=>alert.hidden = true, 3000) 
+            if (symbol.value != "" && quantity.value != ""){
+                submit.disabled = false
+            } else {
+                submit.disabled = true
+            }
+        }
+    </script>
+{% endblock %}

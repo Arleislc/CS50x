@@ -1,0 +1,39 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.menu{
+    padding: 0px 15px 0px 15px ;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: #772222;
+    height: 60px;
+    font-size: larger;
+    font-family: "Roboto" ;
+}
+
+.header a {
+    margin: 5px;
+    color: #FFFFFF;
+}
+
+a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 100px;
+}
+a .selected{
+    background-color:#774444;
+}
+
+.hide{
+    visibility: hidden;
+}
+.show{
+    visibility: visible;
+}

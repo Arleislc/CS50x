@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <form action="/quote" method="post">
+        {% if invalid: %}
+            <p id="alert" style="font-size:12px; color:red; font-style: italic">Bad request. Try again.</p>
+        {% endif %}
+        <div class="form-group">
+            <input id="symbol" autocomplete="off" readonly 
+            onfocus="this.removeAttribute('readonly');" autofocus class="form-control" name="symbol" placeholder="Symbol" type="text" required>
+        </div>
+        <button id="submit" class="btn btn-primary" type="submit" disabled>Quote</button>
+    </form>
+
+
+    <script>
+        let symbol = document.querySelector("#symbol")
+        let submit = document.querySelector("#submit")
+        let alert = document.querySelector("#alert")
+
+        symbol.value = ""
+        symbol.onkeyup = validate
+        symbol.onchange = validate
+
+
+        function validate() {
+            setTimeout(()=>alert.hidden = true, 1000) 
+            if (symbol.value != ""){
+                submit.disabled = false
+            } else {
+                submit.disabled = true
+            }
+        }
+    </script>
+{% endblock %}

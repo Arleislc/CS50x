@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <form class="needs-validation" novalidate action="/register" method="post">
+        
+        
+        
+        <div class="form-group">
+            <input id="username" autocomplete="off" readonly 
+            onfocus="this.removeAttribute('readonly');" autofocus class="form-control" name="username" placeholder="Username" type="text" required>
+            {% if invalid: %}
+                <p id="alert" style="font-size:12px; color:red; font-style: italic">This username already exists</p>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <input id="password" autocomplete="off" readonly 
+            onfocus="this.removeAttribute('readonly');" class="form-control" name="password" placeholder="Password" type="password" required>
+        </div>
+        <div class="form-group">
+            <input id="confirmation" autocomplete="off" readonly 
+            onfocus="this.removeAttribute('readonly');" class="form-control" name="password" placeholder="Password (again)" type="password" required>
+        </div>
+        <button id="submit" class="btn btn-primary" type="submit" disabled>Log In</button>
+    </form>
+
+
+    <script>
+        let username = document.querySelector("#username")
+        let password = document.querySelector("#password")
+        let confirmation = document.querySelector("#confirmation")
+        let submit = document.querySelector("#submit")
+        let alert = document.querySelector("#alert")
+
+        username.value = ""
+        password.value = ""
+        confirmation.value = ""
+
+        username.onkeyup = validate
+        password.onkeyup = validate
+        confirmation.onkeyup = validate
+
+        function validate() {
+            setTimeout(()=>alert.hidden = true, 3000) 
+            if (username.value != "" && password.value != "" && confirmation.value != ""){
+                submit.disabled = false
+            } else {
+                submit.disabled = true
+            }
+        }
+    </script>
+{% endblock %}
